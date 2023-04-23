@@ -1,0 +1,20 @@
+.container{
+    width: 25em;
+    position: sticky;
+    top: 0;
+    width: 50%;
+    
+}
+
+.text{
+    margin-top: -5em;
+    margin-bottom: 10em ;
+}
+
+.illustrator-container{
+    margin-top: -5em;
+}
+
+.inner-container{
+    width: 17em;
+}
