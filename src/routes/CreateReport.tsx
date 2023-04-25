@@ -1,22 +1,17 @@
 import house from '../res/house.jpg'
-import arrowRight from '../res/arrowRight.svg'
-import arrowLeft from '../res/arrowLeft.svg'
 import { useLocation } from 'react-router-dom';
 import './createreport.css'
 import { Template } from '../utilities/TemplateInt';
 import { useEffect, useState } from 'react';
+import Qna from '../utilities/QnaInt';
+import Report from '../utilities/ReportInt';
+import generatePdfFromReport from '../utilities/generatePdfFromReport';
+import { useNavigate } from "react-router-dom";
+
 
 export default function CreateReport() {
 
-    interface Response {
-        title: string,
-        sections: {title: string, answers: string[]}[]
-    }
-
-    interface Qna {
-        question: string,
-        answer: string,
-    }
+    const navigate = useNavigate();
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentSectionIndex, setCurrentSectionIndex] = useState(0)
@@ -103,7 +98,36 @@ export default function CreateReport() {
     }
 
     const generateReport =()=>{
+        const newReport: Report | undefined = createReportObject()
+        if (newReport !== undefined){
+            generatePdfFromReport(newReport)
+            // save report in database
+            // save pdf
+        }
+    }
 
+    const createReportObject =():Report | undefined=>{
+        let newReport: Report | undefined
+        if (qnaSections !== undefined){
+            if (reportName !== ''){
+                const newReportSections = []
+                for (let i=0; i<qnaSections?.length; i++){
+                    const newReportSection = {title: sections[i].title, qnas: qnaSections[i]}
+                    newReportSections.push(newReportSection)
+                }
+                newReport = {
+                    title: reportName,
+                    sections: newReportSections
+                }
+            } else{
+                // show some form of alert
+            }
+        }
+        return newReport
+    }
+
+    const toGeneratePDF =()=>{
+        navigate('/pdf-generated', {state: {report: createReportObject()}})
     }
 
   return (
@@ -117,7 +141,7 @@ export default function CreateReport() {
                 <textarea placeholder='answer the question'className='text-3xl bg-black focus:outline-none border-b-2 border-white text-white w-full mt-10'
                 rows={3} value={currentAnswer} onChange={(e)=>{setCurrentAnswer(e.target.value)}}/>
                 <div>
-                    <button className='mt-10' onClick={toNextQuestion}>Next</button>
+                    <button className='mt-10' onClick={toNextQuestion}>save answer</button>
                 </div>
                 
             </div>
@@ -125,13 +149,13 @@ export default function CreateReport() {
             <div>
                 <input placeholder='name the report' className='text-3xl bg-black focus:outline-none border-b-2 border-white text-white w-full mt-10'
                 value={reportName} onChange={(e)=>{setReportName(e.target.value)}}/>
-                <button className='mt-10' >Generate report</button>
+                <button className='mt-10' onClick={toGeneratePDF}>Generate report</button>
             </div>
         )}
         <img src={house} alt="template image" className='template-image object-cover '/>
-        <div className='fixed bottom-0 end-0 bg-white mr-10 mb-5 flex p-5 rounded-xl'>
-            <div className='mr-5' onClick={moveBackwards}><img src={arrowLeft} alt='left pointing arrow' /></div>
-            <div onClick={moveFoward}><img src={arrowRight} alt='right pointing arrow'/></div>
+        <div className='fixed bottom-0 start-0 bg-white ml-10 mb-5 flex p-5 rounded-xl cursor-pointer'>
+            <div className='mr-5' onClick={moveBackwards}>Prev</div>
+            <div onClick={moveFoward}>Next</div>
         </div>
     </div>
   )
