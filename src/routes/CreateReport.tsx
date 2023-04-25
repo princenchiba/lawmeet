@@ -134,7 +134,7 @@ export default function CreateReport() {
     <div className="h-screen w-screen bg-black flex items-center justify-evenly">
         {!readyToGenerateReport? (
             <div className='p-5'>
-                <p className='text-white text-lg mb-5'>{currentSectionIndex + 1 + '. ' + sections[currentSectionIndex].title}</p>
+                <p className='text-white text-lg mb-5'>{sections[currentSectionIndex].title}</p>
                 <p className='text-white text-3xl'>
                     {`${currentQuestionIndex+1}. ${template.sections[currentSectionIndex].questions[currentQuestionIndex]}?`}
                 </p>
