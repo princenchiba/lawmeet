@@ -141,7 +141,7 @@ export default function CreateReport() {
                 <textarea placeholder='answer the question'className='text-3xl bg-black focus:outline-none border-b-2 border-white text-white w-full mt-10'
                 rows={3} value={currentAnswer} onChange={(e)=>{setCurrentAnswer(e.target.value)}}/>
                 <div>
-                    <button className='mt-10' onClick={toNextQuestion}>save answer</button>
+                    <button className='mt-10' onClick={toNextQuestion}>save and continue</button>
                 </div>
                 
             </div>
