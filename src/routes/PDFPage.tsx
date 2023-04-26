@@ -18,7 +18,7 @@ export default function PDFPage() {
   return (
     <div className='w-screen h-screen'>
         <PDFViewer className='w-full h-full'>
-            <PDFComponent/>
+            <PDFComponent report={report}/>
         </PDFViewer>
     </div>
   )
