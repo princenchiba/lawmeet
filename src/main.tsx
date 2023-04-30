@@ -6,7 +6,7 @@ import './index.css'
 import { ClerkProvider } from "@clerk/clerk-react";
 import Reports from './routes/Reports';
 import TemplatesPage from './routes/TemplatesPage';
-import CreateReport from './routes/CreateReport';
+import CreateReportPage from './routes/CreateReportPage';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import PDFPage from './routes/PDFPage';
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     },
     {
       path: "create-report",
-      element: <CreateReport/>,
+      element: <CreateReportPage/>,
     },
     {
       path: "pdf-generated",

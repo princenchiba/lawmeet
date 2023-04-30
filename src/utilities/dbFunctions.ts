@@ -1,6 +1,7 @@
 import faunadb, {Client} from 'faunadb'
 import createDbClient from './createDbClient';
 import { Template } from './TemplateInt';
+import Report from './ReportInt'
 
 const client: Client = createDbClient()
 const query = faunadb.query
@@ -52,4 +53,22 @@ const listTemplateIds =async()=>{
     }
 
     return templateIds
+}
+
+
+export const createReport = async(report: Report)=>{
+
+    try{
+            const res = await client.query(
+                query.Create(
+                query.Collection('Reports'),
+                { data: report },
+                )
+            )
+            console.log('report created', res)
+    } catch(e){
+        console.log('report creation error', e)
+    }
+    
+
 }
