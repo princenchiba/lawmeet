@@ -11,7 +11,10 @@ export default function ReportItem() {
                 <p className='opacity-50'>5:12pm . Template 1</p>
             </div>
         </div>
-        <button className='bg-white hover:outline-none focus:outline-none'>View</button>
+        <div>
+          <button className='bg-white hover:outline-none focus:outline-none'>Edit</button>
+          <button className='bg-white hover:outline-none focus:outline-none text-red-600'>Delete</button>
+        </div>
     </div>
   )
 }
