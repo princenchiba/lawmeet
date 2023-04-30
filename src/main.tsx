@@ -4,7 +4,7 @@ import App from './App'
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css'
 import { ClerkProvider } from "@clerk/clerk-react";
-import Reports from './routes/Reports';
+import ReportsPage from './routes/ReportsPage';
 import TemplatesPage from './routes/TemplatesPage';
 import CreateReportPage from './routes/CreateReportPage';
 import store from './redux/store'
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       children: [
         {
           path: "reports",
-          element: <Reports />,
+          element: <ReportsPage />,
         },
         {
           path: "templates",

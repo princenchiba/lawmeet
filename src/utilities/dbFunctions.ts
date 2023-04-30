@@ -72,3 +72,49 @@ export const createReport = async(report: Report)=>{
     
 
 }
+
+export const listReports = async () =>{
+    let reports: Report[] = []
+
+   try{
+    const reportIds: string[] = await listReportIds()
+    for (let i=0; i<reportIds.length; i++){
+        const res: any = await client.query(
+            query.Get(
+                query.Ref(
+                    query.Collection('Reports'), reportIds[i]
+                )
+            )
+        )
+        const report:Report = res.data
+        reports.push(report)
+    }
+   } catch(error){
+    console.log('list reports error', error)
+   }
+
+   console.log('the reports', reports)
+   return reports
+}
+
+const listReportIds =async ()=>{
+    let reportIds: string[] = []
+
+    interface Response{
+        data: any
+    }
+    
+    try{
+        const res:Response = await client.query(
+            query.Paginate(query.Match(query.Index('all_reports')))
+        )
+        for (let i=0; i<res.data.length; i++){
+            const reportId: string = res.data[i].value.id
+            reportIds.push(reportId)
+        }
+    }catch(error){
+        console.log('db reports error', error)
+    }
+
+    return reportIds
+}

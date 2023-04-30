@@ -146,7 +146,7 @@ export default function CreateReportPage() {
         const newReport: Report | undefined = createReportObject()
         if (newReport !== undefined){
             try{
-                createReport(newReport)
+                await createReport(newReport)
                 navigate('/pdf-generated', {state: {report: newReport}})
             } catch(e){
                 console.log('error on the page', e)
