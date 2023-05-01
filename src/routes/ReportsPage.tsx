@@ -42,7 +42,7 @@ export default function ReportsPage() {
           <div className='mt-10'>
             {
               reports.map(report =>(
-                <ReportItemComponent report={report} key={report.title}/>
+                <ReportItemComponent report={report} key={Math.random()}/>
               ))
             }
           </div>

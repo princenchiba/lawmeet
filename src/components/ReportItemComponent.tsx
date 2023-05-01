@@ -8,8 +8,8 @@ export default function ReportItemComponent(props:{report: Report}) {
   const navigate = useNavigate();
 
   return (
-    <div className='flex justify-between items-start cursor-default' onClick={()=>{navigate('/pdf-generated', {state: {report: props.report}})}}>
-        <div className='flex'>
+    <div className='flex justify-between items-start cursor-default' >
+        <div className='flex' onClick={()=>{navigate('/view-report', {state: {report: props.report}})}}>
             <img src={shoppingIcon} alt='template-icon' />
             <div className='m-5'>
                 <p>{props.report.title}</p>
@@ -17,8 +17,7 @@ export default function ReportItemComponent(props:{report: Report}) {
             </div>
         </div>
         <div>
-          <button className='bg-white hover:outline-none focus:outline-none'>Edit</button>
-          <button className='bg-white hover:outline-none focus:outline-none text-red-600'>Delete</button>
+          <button className='bg-white hover:outline-none focus:outline-none' onClick={()=>{navigate('/pdf-generated', {state: {report: props.report}})}}>View PDF</button>
         </div>
     </div>
   )
