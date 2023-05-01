@@ -10,9 +10,9 @@ export default function ViewReport() {
     const report: Report = location.state?.report
 
     return (
-        <div className="flex h-screen w-screen p-10 flex-col">
+        <div className="flex h-screen w-screen p-10 flex-col mb-10">
             <h2 className="text-2xl text-black font-bold mb 10" style={{marginBottom:'1em'}}>{report.title}</h2>
-            <div>
+            <div >
                 {report.sections.map(section=>(
                     <SectionComponent section={section} key={section.title}/>
                 ))}
