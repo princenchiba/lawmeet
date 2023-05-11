@@ -6,8 +6,8 @@ import flower from '../res/flower.svg'
 import './reports.css'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react'
-import { listReports } from '../utilities/dbFunctions'
-import Report from '../utilities/ReportInt'
+import { listReports } from '../utils/dbFunctions'
+import Report from '../utils/ReportInt'
 
 export default function ReportsPage() {
 
@@ -24,7 +24,8 @@ export default function ReportsPage() {
   }, [])
 
   const getReports =async ()=>{
-    setReports(await listReports()) 
+    const reports = await listReports()
+    setReports(reports)
   }
 
   return (

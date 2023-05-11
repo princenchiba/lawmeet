@@ -1,9 +1,12 @@
 import { useLocation } from 'react-router-dom';
-import Report from "../utilities/ReportInt";
-import SectionComponent from "../components/SectionComponent";
+import Report from "../utils/ReportInt";
+import { deleteReport } from '../utils/dbFunctions';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ViewReport() {
+
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -35,6 +38,18 @@ export default function ViewReport() {
     const timeOfAdjournment: string = report.sections[8].qnas[0].answer
 
     const reportGenerator: string = report.sections[9].qnas[0].answer
+
+    const handleDelete =async ()=>{
+        try{
+            // delete the report
+            await deleteReport(report.id)
+            // navigate to the reports page
+            navigate('/reports')
+        } catch(e){
+            console.log('could not delete this report')
+        }
+        
+    }
 
     return (
         <div className="flex h-screen w-screen p-10 flex-col mb-10">
@@ -127,7 +142,7 @@ export default function ViewReport() {
             <div className='fixed bottom-0 w-screen flex justify-evenly bg-white p-3'>
                 <button className='bg-black text-white'>Edit</button>
                 <button className='bg-blue-600 text-white'>Add Feedback</button>
-                <button className='bg-red-700 text-white'>Delete</button>
+                <button className='bg-red-700 text-white' onClick={handleDelete}>Delete</button>
             </div>
         </div>
     )

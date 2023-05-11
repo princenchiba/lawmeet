@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PDFComponent from '../components/PDFComponent'
 import { useLocation } from 'react-router-dom';
-import Report from '../utilities/ReportInt';
+import Report from '../utils/ReportInt';
 import { PDFViewer } from '@react-pdf/renderer';
 
 

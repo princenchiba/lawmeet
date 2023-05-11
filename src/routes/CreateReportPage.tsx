@@ -1,12 +1,12 @@
 import house from '../res/house.jpg'
 import { useLocation } from 'react-router-dom';
 import './createreport.css'
-import { Template } from '../utilities/TemplateInt';
+import { Template } from '../utils/TemplateInt';
 import { useEffect, useState } from 'react';
-import Qna from '../utilities/QnaInt';
-import Report from '../utilities/ReportInt';
+import Qna from '../utils/QnaInt';
+import Report from '../utils/ReportInt';
 import { useNavigate } from "react-router-dom";
-import {createReport} from '../utilities/dbFunctions'
+import {createReport} from '../utils/dbFunctions'
 
 
 export default function CreateReportPage() {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import Report from '../utilities/ReportInt';
+import Report from '../utils/ReportInt';
 
 const styles = StyleSheet.create({
     page: {
@@ -39,10 +39,6 @@ const styles = StyleSheet.create({
   });
 
 export default function PDFComponent(props:{report: Report}) {
-
-    useEffect(()=>{
-        console.log(props.report)
-    }, [])
 
     const meetingDate: string = props.report.sections[0].qnas[0].answer
     const nameOfSeniorAttorney: string = props.report.sections[1].qnas[0].answer
