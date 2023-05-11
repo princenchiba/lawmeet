@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import Report from '../utils/ReportInt';
+import Report from '../utilities/ReportInt';
 
 const styles = StyleSheet.create({
     page: {

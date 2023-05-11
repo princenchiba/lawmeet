@@ -1,10 +1,14 @@
 import { useLocation } from 'react-router-dom';
-import Report from "../utils/ReportInt";
-import { deleteReport } from '../utils/dbFunctions';
+import Report from "../utilities/ReportInt";
+import { deleteReport } from '../utilities/dbFunctions';
 import { useNavigate } from 'react-router-dom';
+import FeedbackInputComponent from '../components/FeedbackInputComponent';
+import { useState } from 'react';
 
 
 export default function ViewReport() {
+
+    const [showFeedbackInput, setShowFeedbackInput] = useState(false)
 
     const navigate = useNavigate();
 
@@ -53,6 +57,7 @@ export default function ViewReport() {
 
     return (
         <div className="flex h-screen w-screen p-10 flex-col mb-10">
+            {showFeedbackInput && <FeedbackInputComponent id={report.id} setShow={setShowFeedbackInput}/>}
             <div >
                 <p style={{fontWeight:'bold', fontSize:20}}>
                     {`MINUTES OF LEGAL BRIEFING WITH ${nameOfClient} - STAC00318`}
@@ -141,7 +146,7 @@ export default function ViewReport() {
             </div>
             <div className='fixed bottom-0 w-screen flex justify-evenly bg-white p-3'>
                 <button className='bg-black text-white'>Edit</button>
-                <button className='bg-blue-600 text-white'>Add Feedback</button>
+                <button className='bg-blue-600 text-white' onClick={()=>{setShowFeedbackInput(true)}}>Add Feedback</button>
                 <button className='bg-red-700 text-white' onClick={handleDelete}>Delete</button>
             </div>
         </div>
