@@ -119,17 +119,19 @@ const listReportIds =async ()=>{
     return reportIds
 }
  
-export const deleteReport = async (id: string)=>{
-    console.log(`deleting ${id}...`)
-    try{
-        await client.query(query.Delete(query.Ref(query.Collection('Reports'), id)))
-    } catch(e){
-        console.log(e)
+export const deleteReport = async (id: string | undefined)=>{
+    if (id !== undefined){
+        console.log(`deleting ${id}...`)
+        try{
+            await client.query(query.Delete(query.Ref(query.Collection('Reports'), id)))
+        } catch(e){
+            console.log(e)
+        }
     }
 }
 
 
-export const updateReport = async (params:{id:string, feedback:{from:string | null | undefined, text:string}})=>{
+export const updateReport = async (params:{id:string | undefined, feedback:{from:string | null | undefined, text:string}})=>{
     try{
         console.log('the id',params.id)
         await client.query(query.Update(query.Ref(query.Collection('Reports'), params.id),
