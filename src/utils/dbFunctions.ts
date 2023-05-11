@@ -62,7 +62,7 @@ export const createReport = async(report: Report)=>{
             const res = await client.query(
                 query.Create(
                 query.Collection('Reports'),
-                { data: report },
+                { data: {...report, feedback:[]} },
                 )
             )
             console.log('report created', res)
@@ -118,12 +118,26 @@ const listReportIds =async ()=>{
 
     return reportIds
 }
-
+ 
 export const deleteReport = async (id: string)=>{
     console.log(`deleting ${id}...`)
     try{
         await client.query(query.Delete(query.Ref(query.Collection('Reports'), id)))
     } catch(e){
         console.log(e)
+    }
+}
+
+
+export const updateReport = async (params:{id:string, feedback:{from:string | null | undefined, text:string}})=>{
+    try{
+        console.log('the id',params.id)
+        await client.query(query.Update(query.Ref(query.Collection('Reports'), params.id),
+            { data: { feedback: query.Append([{from:params.feedback.from, text: params.feedback.text}],
+                query.Select(['data', 'feedback'], query.Get(query.Ref(query.Collection('Reports'), params.id)))) } },
+        ))
+        console.log('the report is updated')
+    }catch(e){
+        console.log('the report could not be updated', e)
     }
 }

@@ -1,8 +1,8 @@
 import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
-import { updateReport } from "../utilities/dbFunctions";
+import { updateReport } from "../utils/dbFunctions";
 
-export default function FeedbackInputComponent(props:{id:string | undefined, setShow:any}) {
+export default function FeedbackInputComponent(props:{id:string, setShow:any}) {
 
     const currentUser = useUser().user
 

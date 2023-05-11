@@ -1,6 +1,6 @@
 import React from 'react'
 import shoppingIcon from '../res/shopping.svg'
-import Report from '../utilities/ReportInt'
+import Report from '../utils/ReportInt'
 import { useNavigate } from "react-router-dom";
 
 export default function ReportItemComponent(props:{report: Report}) {

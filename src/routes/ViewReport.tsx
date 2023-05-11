@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import Report from "../utilities/ReportInt";
-import { deleteReport } from '../utilities/dbFunctions';
+import Report from "../utils/ReportInt";
+import { deleteReport } from '../utils/dbFunctions';
 import { useNavigate } from 'react-router-dom';
 import FeedbackInputComponent from '../components/FeedbackInputComponent';
 import { useState } from 'react';

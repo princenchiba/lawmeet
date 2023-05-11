@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TemplateComponent from '../components/TemplateComponent'
-import { listTemplates } from '../utilities/dbFunctions';
-import { Template } from '../utilities/TemplateInt';
+import { listTemplates } from '../utils/dbFunctions';
+import { Template } from '../utils/TemplateInt';
 
 export default function TemplatesPage() {
 
