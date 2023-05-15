@@ -11,6 +11,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 import PDFPage from './routes/PDFPage';
 import ViewReport from './routes/ViewReport';
+import CompleteSavedReport from './routes/CompleteSavedReport';
 
 
 const clerkPubKey: string = "pk_test_c3VubnktbW9uYXJjaC03Ny5jbGVyay5hY2NvdW50cy5kZXYk" // remember to move to env file
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
       path: "view-report",
       element: <ViewReport/>,
+    },
+    {
+      path: "complete-report",
+      element: <CompleteSavedReport/>,
     },
   ]);
 

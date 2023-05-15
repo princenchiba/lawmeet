@@ -1,7 +1,7 @@
 import gavel from '../res/gavel.png'
 import './template.css'
 import { useNavigate } from "react-router-dom";
-import { Template } from '../utils/TemplateInt';
+import { Template } from '../utilities/TemplateInt';
 
 export default function TemplateComponent(props:{template:Template}) {
 

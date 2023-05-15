@@ -1,12 +1,12 @@
 import house from '../res/house.jpg'
 import { useLocation } from 'react-router-dom';
 import './createreport.css'
-import { Template } from '../utils/TemplateInt';
+import { Template } from '../utilities/TemplateInt';
 import { useEffect, useState } from 'react';
-import Qna from '../utils/QnaInt';
-import Report from '../utils/ReportInt';
+import Qna from '../utilities/QnaInt';
+import Report from '../utilities/ReportInt';
 import { useNavigate } from "react-router-dom";
-import {createReport} from '../utils/dbFunctions'
+import {createReport} from '../utilities/dbFunctions'
 
 
 export default function CreateReportPage() {
@@ -122,28 +122,29 @@ export default function CreateReportPage() {
         }
     }
 
-    const createReportObject =():Report | undefined=>{
+    const createReportObject =(isComplete: boolean):Report | undefined=>{
         let newReport: Report | undefined
+        let newReportName = reportName
         if (qnaSections !== undefined){
-            if (reportName !== ''){
-                const newReportSections = []
-                for (let i=0; i<qnaSections?.length; i++){
-                    const newReportSection = {title: sections[i].title, qnas: qnaSections[i]}
-                    newReportSections.push(newReportSection)
-                }
-                newReport = {
-                    title: reportName,
-                    sections: newReportSections
-                }
-            } else{
-                // show some form of alert
+            if (reportName === ''){
+                newReportName = 'incomplete report'
+            }
+            const newReportSections = []
+            for (let i=0; i<qnaSections?.length; i++){
+                const newReportSection = {title: sections[i].title, qnas: qnaSections[i]}
+                newReportSections.push(newReportSection)
+            }
+            newReport = {
+                title: newReportName,
+                sections: newReportSections,
+                isComplete: isComplete
             }
         }
         return newReport
     }
 
     const toGeneratePDF =async ()=>{
-        const newReport: Report | undefined = createReportObject()
+        const newReport: Report | undefined = createReportObject(true)
         if (newReport !== undefined){
             try{
                 await createReport(newReport)
@@ -158,6 +159,19 @@ export default function CreateReportPage() {
     const handleBinaryAnswer =(answer: string)=>{
         answerCurrentQuestion(answer)
         moveFoward()
+    }
+
+    const saveForLater =async ()=>{
+        const newReport: Report | undefined = createReportObject(false)
+        console.log(newReport)
+        if (newReport !== undefined){
+            try{
+                await createReport(newReport)
+                navigate('/reports')
+            } catch(e){
+                console.log('error on the page', e)
+            }
+        }
     }
 
   return (
@@ -179,8 +193,9 @@ export default function CreateReportPage() {
                 <div>
                     <textarea placeholder='answer the question'className='text-3xl bg-black focus:outline-none border-b-2 border-white text-white w-full mt-10'
                     rows={3} value={currentAnswer} onChange={(e)=>{setCurrentAnswer(e.target.value)}}/>
-                    <div>
+                    <div className='flex items-center '>
                         <button className='mt-10' onClick={answerAndMoveOn}>save and continue</button>
+                        <button className='text-white mt-10 ml-5 bg-black' onClick={saveForLater}>save for later</button>
                     </div>
                 </div>)}
             </div>

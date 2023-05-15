@@ -1,11 +1,15 @@
 import React from 'react'
 import shoppingIcon from '../res/shopping.svg'
-import Report from '../utils/ReportInt'
+import Report from '../utilities/ReportInt'
 import { useNavigate } from "react-router-dom";
 
 export default function ReportItemComponent(props:{report: Report}) {
 
   const navigate = useNavigate();
+
+  const continueEditting =()=>{
+    navigate('/complete-report', {state: {report: props.report}})
+  }
 
   return (
     <div className='flex justify-between items-start cursor-default' >
@@ -17,7 +21,9 @@ export default function ReportItemComponent(props:{report: Report}) {
             </div>
         </div>
         <div>
-          <button className='bg-white hover:outline-none focus:outline-none' onClick={()=>{navigate('/pdf-generated', {state: {report: props.report}})}}>View PDF</button>
+          {props.report.title !== 'incomplete report' ? 
+            (<button className='bg-white hover:outline-none focus:outline-none' onClick={()=>{navigate('/pdf-generated', {state: {report: props.report}})}}>View PDF</button>):
+            (<button onClick={continueEditting}>continue editing</button>)}
         </div>
     </div>
   )

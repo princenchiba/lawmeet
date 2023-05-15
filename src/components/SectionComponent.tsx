@@ -1,4 +1,4 @@
-import Qna from "../utils/QnaInt"
+import Qna from "../utilities/QnaInt"
 
 export default function SectionComponent(props:{section:{title:string, qnas:Qna[]}}) {
 
