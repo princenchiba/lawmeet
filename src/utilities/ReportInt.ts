@@ -5,5 +5,5 @@ export default interface Report {
     title: string,
     sections: {title: string, qnas: Qna[]}[],
     feedback?: {from:string, text: string}[],
-    isComplete: boolean
+    isComplete?: boolean
 }
